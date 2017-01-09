@@ -1,0 +1,57 @@
+{% extends 'app/base.html' %}
+{% load helper_tags %}
+
+{% block title %} User List {% endblock %}
+
+{% block body %}
+  <h1 class="page-header">User List</h1>
+
+  <br>
+  <div class="form-group">
+    <a href="{% url 'user_create' %}" class="btn btn-success">Create User</a>
+    <a href="{% url 'user_export' %}" data-confirm="Are you sure want to export user?" class="btn btn-primary post-link">Export Users</a>
+  </div>
+
+  <table class="table table-bordered data-table">
+  <thead>
+  <tr>
+    <th>Username</th>
+    <th>Birthday</th>
+    <th>Eligible</th>
+    <th>Random Number</th>
+    <th>BizzFuzz</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for user in object_list %}
+    <tr>
+    <td><a href="{% url 'user_detail' user.id %}">{{ user.username }}</a></td>
+    <td>{{ user.birthday }}</td>
+    <td>{{ user|eligible }}</td>
+    <td>{{ user.random_number }}</td>
+    <td>{{ user|bizzfuzz }}</td>
+    <td>
+      <div class="dropdown">
+          <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                  aria-expanded="true">
+            Actions
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li>
+              <a href="{% url 'user_edit' user.id %}">Edit</a>
+            </li>
+            <li>
+              <a href="{% url 'user_delete' user.id %}" class="post-link" data-confirm="Are you sure want to delete this user?">Delete</a>
+            </li>
+          </ul>
+        </div>
+    </td>
+    </tr>
+
+  {% endfor %}
+  </tbody>
+  </table>
+
+{% endblock %}

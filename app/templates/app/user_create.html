@@ -1,0 +1,37 @@
+{% extends 'app/base.html' %}
+{% load bootstrap3 %}
+
+
+{% block title %} Create User {% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css">
+{% endblock extra_css %}
+
+{% block body %}
+  <h1 class="page-header">Create User</h1>
+  <br/>
+  
+  <form action="{{ request.path }}" method="post" class="form">
+    {% csrf_token %}
+    
+    {% bootstrap_form form %}
+
+    {% buttons %}
+      <button type="submit" class="btn btn-primary">Save</button>
+    {% endbuttons %}
+
+  </form>
+
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+    <script>
+        $(function(){
+            $('#id_birthday').datepicker({format:'yyyy-mm-dd'}).on('changeDate', function(ev){                 
+                $('.datepicker').hide();
+            });
+        });
+    </script>
+
+{% endblock extra_js %}

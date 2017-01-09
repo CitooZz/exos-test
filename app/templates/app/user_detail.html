@@ -1,0 +1,18 @@
+{% extends 'app/base.html' %}
+{% load helper_tags %}
+
+{% block title %} User Detail {% endblock %}
+
+{% block body %}
+  <h1 class="page-header">User Detail</h1>
+
+  <br>
+  <ul>
+       <li>Username: {{ user.username }}</li>
+       <li>Birthday: {{ user.birthday }}</li>
+       <li>Eligible: {{ user|eligible }}</li>
+       <li>Random Number: {{ user.random_number }}</li>
+       <li>BizzFuzz: {{ user|bizzfuzz }}</li>
+  </ul>
+    
+{% endblock %}
